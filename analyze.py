@@ -4,6 +4,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+'''
+# 사용법
+ python analyze.py <csv_path> [옵션]
+ 예시
+ python analyze.py video_preds.csv
+ [옵션]
+ -- plot
+'''
+
 def moving_average(x, w):
     if w<=1: return x.values.astype(float)
     return np.convolve(x.values.astype(float), np.ones(w)/w, mode='same')
@@ -72,8 +81,8 @@ def main():
 
     # DROWSY 점수(바이너리 가정) 만들기: 예) 예측이 DROWSY면 prob, 아니면 1-prob
     dlab = args.drowsy_label
-    dscore = np.where(df["label"]==dlab, df["prob"].astype(float), 1.0-df["prob"].astype(float))
-    df["drowsy_score_raw"]=dscore
+    dscore = df["prob"].astype(float)
+    df["drowsy_score_raw"] = dscore
     df["drowsy_score_smooth"]=moving_average(df["drowsy_score_raw"], args.smooth)
 
     # 단순 임계치 이벤트 탐지 (스무딩 점수가 thr 이상으로 k 프레임 이상 지속)
