@@ -73,10 +73,10 @@ stay_awake_ai/
 ### A) Real-time / video inference with **TFLite**
 ```bash
 # video file
-python tflite_test.py export_tflite/drowsy_fp16.tflite export_ckpt/labels.json input.mp4 --show
+python tflite_test.py export_to_tflite/drowsy_fp16.tflite export/labels.json input.mp4 --show
 
 # webcam (index 0) + mirrored preview
-python tflite_test.py export_tflite/drowsy_fp16.tflite export_ckpt/labels.json --camera 0 --show --flip
+python tflite_test.py export_to_tflite/drowsy_fp16.tflite export/labels.json --camera 0 --show --flip
 ```
 Common flags:
 - `--decision-thr 0.8` → classify as DROWSY if p≥0.8  
